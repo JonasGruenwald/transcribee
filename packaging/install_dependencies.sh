@@ -13,6 +13,7 @@ trap 'kill 0' SIGINT
 
 pids=()
 
+pdm config check_update false
 pdm install -p backend/ & pids+=($!)
 pdm install -p worker/ & pids+=($!)
 pnpm --prefix frontend/ install & pids+=($!)

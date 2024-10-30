@@ -1,0 +1,34 @@
+version: '3'
+services:
+  app:
+    depends_on:
+      - db
+    build:
+      context: .
+      dockerfile: packaging/Dockerfile
+    ports:
+      - "5173:5173"
+    environment:
+      - TRANSCRIBEE_BACKEND_DATABASE_URL=postgresql://transcribee:transcribee@db:5432/transcribee
+      - MEDIA_URL_BASE=/
+    volumes:
+      - storage_data:/app/backend/storage
+      - pages_data:/app/backend/data/pages
+      - models:/app/worker/transcribee_worker/.data/models
+
+  db:
+    image: postgres:14
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: transcribee
+      POSTGRES_PASSWORD: transcribee
+      POSTGRES_DB: transcribee
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+volumes:
+  pg_data:
+  storage_data:
+  pages_data:
+  models:
