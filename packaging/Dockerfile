@@ -20,4 +20,4 @@ ENV MEDIA_URL_BASE=http://localhost:5173/
 
 ENTRYPOINT [ "nix-shell", "shell.nix", "--command" ]
 
-CMD [ "overmind start -f packaging/Procfile" ]
+CMD [ "sh", "-c", "rm -f ./.overmind.sock && overmind start -f packaging/Procfile" ]

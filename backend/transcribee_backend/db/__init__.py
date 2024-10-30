@@ -18,7 +18,7 @@ DEFAULT_SOCKET_PATH = Path(__file__).parent.parent.parent / "db" / "sockets"
 
 DATABASE_URL = os.environ.get(
     "TRANSCRIBEE_BACKEND_DATABASE_URL",
-    f"postgresql:///transcribee?host={DEFAULT_SOCKET_PATH}",
+    "TRANSCRIBEE_BACKEND_DATABASE_URL=postgresql://transcribee:transcribee@db:5432/transcribee",
 )
 
 engine = create_engine(
